@@ -1,0 +1,14 @@
+[azure]
+tenant_id = "your-tenant-id"
+client_id = "your-client-id"
+client_secret = "your-client-secret"
+
+[database]
+user = "user"
+password = "password"
+host = "localhost"
+port = 5432
+dbname = "your_db"
+
+[env]
+eva_server_id = "eva-001"
