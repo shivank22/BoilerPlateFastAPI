@@ -24,9 +24,16 @@ app = FastAPI(
     version="1.0.0",
 )
 
+ENV = os.getenv("ENV", "development")
+
+if ENV == "production":
+    allowed_origins = ["https://your-frontend.com"]  # <- Replace with your actual frontend
+else:
+    allowed_origins = ["*"]  # Allow all in development
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -1,25 +1,17 @@
 from fastapi import APIRouter, Depends, status, Query
-from pydantic import BaseModel, Field
 from typing import Optional, List
 from fastapi.responses import JSONResponse
-# from auth.azure_auth import verify_azure_identity
-from docs.tasks_docs import task_fields, task_example, task_create_summary, task_create_description, task_list_summary, task_list_description
+from auth.azure_auth import verify_azure_identity
+from docs.tasks_docs import task_metadata
+from schemas.task import TaskCreate
 
-router = APIRouter(prefix="/tasks", tags=["Tasks"],)#dependencies=[Depends(verify_azure_identity)]
+router = APIRouter(prefix="/tasks", tags=["Tasks"],dependencies=[Depends(verify_azure_identity)])
 
-class TaskCreate(BaseModel):
-    title: str = Field(..., description=task_fields["title"])
-    description: Optional[str] = Field(None, description=task_fields["description"])
-    completed: bool = Field(default=False, description=task_fields["completed"])
-
-    class Config:
-        schema_extra = {"example": task_example}
-
-@router.post("/", summary=task_create_summary, description=task_create_description)
+@router.post("/", summary=task_metadata.Create.summary, description=task_metadata.Create.description)
 def create_task(task: TaskCreate):
     return JSONResponse(status_code=status.HTTP_201_CREATED, content={"message": "Task created", "task": task.dict()})
 
-@router.get("/", summary=task_list_summary, description=task_list_description)
+@router.get("/", summary=task_metadata.List.summary, description=task_metadata.List.description)
 def list_tasks(
     completed: Optional[bool] = Query(None, description="Filter tasks by completion status"),
     title: Optional[str] = Query(None, description="Filter tasks by title"),
