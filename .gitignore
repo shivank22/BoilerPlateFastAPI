@@ -1,2 +1,4 @@
 __pycache__/
 .py*
+.DS_Store
+.pytest_cache/

@@ -1,4 +1,4 @@
-.
+```.
 ├── Dockerfile
 ├── readme.md
 ├── requirements.txt
@@ -32,5 +32,5 @@
 │           ├── test_task.py
 │           └── test_user.py
 └── tests
-
+```
 11 directories, 23 files
