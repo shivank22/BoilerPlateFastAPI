@@ -6,9 +6,14 @@ client_secret = "your-client-secret"
 [database]
 user = "user"
 password = "password"
-host = "localhost"
+host = "db"
 port = 5432
 dbname = "your_db"
 
 [env]
 eva_server_id = "eva-001"
+
+[jwt]
+secret_key = "supersecret"
+algorithm = "HS256"
+access_token_expire_minutes = 60
